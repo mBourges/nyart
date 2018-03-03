@@ -6,6 +6,7 @@ const UPDATE_RECORD = 'updateRecord';
 
 const state = {
   isOpen: false,
+  isSaving: false,
   type: null,
   record: {}
 };

@@ -24,17 +24,15 @@
         </v-card-title>
         <v-divider></v-divider>
         <v-form v-model="valid" ref="form" lazy-validation>
-
-        <v-card-text>
-          <RecordForm :type="selectedType" />
-        </v-card-text>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat @click="dialog = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="submit">Save</v-btn>
-        </v-card-actions>
-
+          <v-card-text>
+            <RecordForm :type="selectedType" />
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions v-if="selectedType != null">
+            <v-spacer></v-spacer>
+            <v-btn flat @click="dialog = false" :disabled="isSaving">Cancel</v-btn>
+            <v-btn flat color="primary" @click="submit" :disabled="!valid || isSaving">Save</v-btn>
+          </v-card-actions>
         </v-form>
       </v-card>
     </v-dialog>
@@ -77,6 +75,9 @@
           this.$store.commit('newRecord/updateRecord', { name: 'RegistrationDate', value: formatdateForInput(new Date()) });
           this.$store.commit('newRecord/updateRecord', { name: 'Recruiter', value: this.$store.getters['user/recruiter'] });
         }
+      },
+      isSaving() {
+        return this.$store.state.newRecord.isSaving;
       }
     },
     methods: {

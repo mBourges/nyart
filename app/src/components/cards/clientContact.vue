@@ -1,20 +1,15 @@
 <script>
-  import { calculateAge } from '@/lib/date';
-  // // import { DisplayLanguages } from '@/components/languages'; // eslint-disable-line no-unused-vars
-  // // import { CodesDisplay } from '../codes'; // eslint-disable-line no-unused-vars
+  // import { DisplayLanguages } from '@/components/languages'; // eslint-disable-line no-unused-vars
   import { FlagIcon } from '../flag'; // eslint-disable-line no-unused-vars
 
   export default {
     functional: true,
-    render(h, { props: { record } }) {
-      const age = record.Birthdate
-        ? `(${calculateAge(record.Birthdate)} yrs old)`
-        : '';
+    render(h, { props: { id, record } }) {
       const links = {
-        candidate: record.id ? `/details/candidate/${record.id}` : '',
-        company: record.Company ? `/details/company/${record.Company.id}` : ''
+        clientContact: `/details/clientcontact/${id}`,
+        company: record.Company && `/details/company/${record.Company.id}`
       };
-      const icon = (<v-icon class="mx-2">person</v-icon>);
+      const icon = (<v-icon class="mx-2">mdi-account-multiple</v-icon>);
       const company = (<span class="pr-2">
         <v-icon class="mx-2" small>mdi-domain</v-icon>
         <span>{ record.Company && record.Company.Name }</span>
@@ -22,10 +17,6 @@
       const job = (<span>
         <v-icon class="mx-2" small>business_center</v-icon>
         <span>{ record.JobTitle }</span>
-      </span>);
-      const salary = (<span>
-        <v-icon class="mx-2" small>mdi-currency-cny</v-icon>
-        <span>{ record.Salary }</span>
       </span>);
 
       return (<v-card height="100%">
@@ -36,18 +27,16 @@
               { record.NationalityCode && <span class="ml-3"><FlagIcon country={record.NationalityCode} /></span> }
             </div>
             <span class="grey--text">{ `${record.FirstnameKanji || ''} ${record.LastnameKanji || ''}` }</span>
-            { record.Birthdate && <span class="ml-3"><small class="caption">{ age }</small></span> }
           </div>
         </v-card-title>
         <v-card-text>
           <div class="pb-2">
             { company } { job }
           </div>
-          <div class="pb-2">{ salary }</div>
           <div>{`Registered by ${record.Recruiter.Name} @${record.RegistrationDate}`}</div>
         </v-card-text>
         <v-card-actions>
-          <v-btn flat to={links.candidate}>View</v-btn>
+          <v-btn flat to={links.clientContact}>View</v-btn>
         </v-card-actions>
       </v-card>);
     }

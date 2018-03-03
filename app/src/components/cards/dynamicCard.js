@@ -1,7 +1,7 @@
 import CandidateCard from './candidate';
-// import ClientContactCard from './clientContact';
-// import CompanyCard from './company';
-// import JobCard from './job';
+import ClientContactCard from './clientContact';
+import CompanyCard from './company';
+import JobCard from './job';
 
 export default {
   functional: true,
@@ -17,12 +17,13 @@ export default {
 
     if (is.candidate) {
       component = CandidateCard;
+    } else if (is.clientContact) {
+      component = ClientContactCard;
+    } else if (is.company) {
+      component = CompanyCard;
+    } else if (is.job) {
+      component = JobCard;
     }
-    // else if (is.clientContact) {
-    //   component = ClientContactCard;
-    // } else if (is.company) {
-    //   component = CompanyCard;
-    // } else if (is.job) { component = JobCard; }
 
     return h(component, { props: { record } });
   }
