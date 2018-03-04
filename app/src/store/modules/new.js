@@ -15,7 +15,7 @@ const mutations = {
   [TOGGLE_DIALOG](state, isOpen) {
     state.isOpen = isOpen;
 
-    if (!isOpen) {
+    if (!state.isOpen) {
       state.type = null;
       state.record = {};
     }

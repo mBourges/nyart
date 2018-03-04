@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import firebullet from '@/lib/firebullet';
   import lookup from './lookup';
 
   export default {
@@ -29,7 +30,12 @@
         };
       },
       handleChange(value) {
-        this.$emit('change', value);
+        const company = {
+          ...value,
+          ref: firebullet.generateRef('Company', value.id)
+        };
+
+        this.$emit('change', company);
       }
     }
   };

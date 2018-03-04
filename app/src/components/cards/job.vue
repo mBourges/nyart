@@ -1,4 +1,6 @@
 <script>
+  /* eslint-disable no-unused-vars */
+  import { CurrencyDisplay } from '../currency';
   // import { DisplayLanguages } from '@/components/languages'; // eslint-disable-line no-unused-vars
   // import { CodesDisplay } from '../codes'; // eslint-disable-line no-unused-vars
 
@@ -23,7 +25,8 @@
       </span>);
       const salary = (<span>
         <v-icon class="mx-2" small>mdi-currency-cny</v-icon>
-        <span>{ record.SalaryMinimum }</span>
+        <CurrencyDisplay value={ record.SalaryMinimum } />
+        <CurrencyDisplay value={ record.SalaryMaximum } />
       </span>);
 
       return (<v-card height="100%">

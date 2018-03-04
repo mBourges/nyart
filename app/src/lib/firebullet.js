@@ -39,14 +39,43 @@ function insertResume(id, resume) {
     });
 }
 
+function insertClientContact(record) {
+  return firestore.collection('ClientContact')
+    .add(record)
+    .then(doc => doc.id);
+}
+
+function insertCompany(record) {
+  return firestore.collection('Company')
+    .add(record)
+    .then(doc => doc.id);
+}
+
+function insertJob(record) {
+  return firestore.collection('Job')
+    .add(record)
+    .then(doc => doc.id);
+}
+
 function insert(type, record) {
   switch (type) {
-  case 'candidate':
-    return insertCandidate(record);
-  default:
+    case 'candidate':
+      return insertCandidate(record);
+    case 'clientContact':
+      return insertClientContact(record);
+    case 'company':
+      return insertCompany(record);
+    case 'job':
+      return insertJob(record);
+    default:
   }
 }
 
+function generateRef(type, id) {
+  return firestore.collection(type).doc(id);
+}
+
 export default {
-  insert
+  insert,
+  generateRef
 };

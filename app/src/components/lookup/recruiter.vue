@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  import firebullet from '@/lib/firebullet';
   import lookup from './lookup';
 
   export default {
@@ -30,7 +31,12 @@
         };
       },
       handleChange(value) {
-        this.$emit('change', value);
+        const recruiter = {
+          ...value,
+          ref: firebullet.generateRef('Users', value.id)
+        };
+
+        this.$emit('value', recruiter);
       }
     }
   };

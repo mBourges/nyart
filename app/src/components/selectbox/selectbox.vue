@@ -4,13 +4,14 @@
     :label="label"
     :items="sources"
     :loading="isLoading"
+    :rules="rules"
   />
 </template>
 
 <script>
   export default {
     name: 'selectbox',
-    props: [ 'label', 'type', 'value' ],
+    props: [ 'label', 'type', 'value', 'rules' ],
     beforeMount() {
       if (!this.sources) {
         this.$store.dispatch('app/fetchPicklist', this.type);

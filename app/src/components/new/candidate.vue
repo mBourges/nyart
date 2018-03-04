@@ -1,23 +1,23 @@
 <template>
   <v-container grid-list-sm>
     <v-layout row wrap>
-          <v-flex xs6>
-            <v-text-field
-              autofocus
-              prepend-icon="person"
-              label="First name"
-              :value="record.Firstname"
-              @input="handleChange('Firstname', $event)"
-            ></v-text-field>
-          </v-flex>
-          <v-flex xs6>
-            <v-text-field
-              label="Last name"
-              :value="record.Lastname"
-              @input="handleChange('Lastname', $event)"
-              :rules="nameRules"
-            ></v-text-field>
-          </v-flex>
+      <v-flex xs6>
+        <v-text-field
+          autofocus
+          prepend-icon="person"
+          label="First name"
+          :value="record.Firstname"
+          @input="handleChange('Firstname', $event)"
+        ></v-text-field>
+      </v-flex>
+      <v-flex xs6>
+        <v-text-field
+          label="Last name"
+          :value="record.Lastname"
+          @input="handleChange('Lastname', $event)"
+          :rules="nameRules"
+        ></v-text-field>
+      </v-flex>
       <v-flex xs6>
         <company-lookup
           :value="record.Company"
@@ -77,7 +77,7 @@
             name="file"
             id="file"
             @change="handleFileChange"
-          ></input>
+          />
           <span>
             Add Resumes
             <v-icon right class="indigo--text">cloud_upload</v-icon>

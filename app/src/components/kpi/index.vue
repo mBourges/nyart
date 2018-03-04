@@ -13,7 +13,7 @@
     </v-toolbar>
     <v-progress-linear v-if="isLoading" class="my-0" indeterminate></v-progress-linear>
     <v-card-title>
-      <h4>{{ recruiter.text }} <small>({{ period.label }})</small></h4>
+      <h4>{{ recruiter.Name }} <small>({{ period.label }})</small></h4>
     </v-card-title>
     <v-list dense>
       <stat label="Candidates" :stat="stats.candidate" />

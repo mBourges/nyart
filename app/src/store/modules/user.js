@@ -1,3 +1,5 @@
+import firebullet from '@/lib/firebullet';
+
 const SET_USER = 'setUser';
 const CLEAR_USER = 'clearUser';
 
@@ -23,8 +25,9 @@ const mutations = {
 const getters = {
   recruiter: (state) => {
     return {
-      Name: state.user.displayName,
-      id: state.user.id
+      Name: state.user && state.user.displayName,
+      id: state.user && state.user.id,
+      ref: state.user && firebullet.generateRef('Users', state.user.id)
     };
   },
   username: (state) => {

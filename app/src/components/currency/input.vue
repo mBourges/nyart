@@ -33,13 +33,13 @@
         }
 
         switch (event.key) {
-        case 'm':
-          this.$emit('input', valueNumber * 1e6);
-          break;
-        case 'k':
-          this.$emit('input', valueNumber * 1e4);
-          break;
-        default:
+          case 'm':
+            this.$emit('input', valueNumber * 1e6);
+            break;
+          case 'k':
+            this.$emit('input', valueNumber * 1e4);
+            break;
+          default:
         }
       }
     }
