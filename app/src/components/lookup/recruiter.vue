@@ -31,12 +31,16 @@
         };
       },
       handleChange(value) {
-        const recruiter = {
-          ...value,
-          ref: firebullet.generateRef('Users', value.id)
-        };
+        if (!value) {
+          this.$emit('change', null);
+        } else {
+          const recruiter = {
+            ...value,
+            ref: firebullet.generateRef('Users', value.id)
+          };
 
-        this.$emit('value', recruiter);
+          this.$emit('value', recruiter);
+        }
       }
     }
   };

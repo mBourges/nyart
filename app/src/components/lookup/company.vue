@@ -30,12 +30,16 @@
         };
       },
       handleChange(value) {
-        const company = {
-          ...value,
-          ref: firebullet.generateRef('Company', value.id)
-        };
+        if (!value) {
+          this.$emit('change', null);
+        } else {
+          const company = {
+            ...value,
+            ref: firebullet.generateRef('Company', value.id)
+          };
 
-        this.$emit('change', company);
+          this.$emit('change', company);
+        }
       }
     }
   };

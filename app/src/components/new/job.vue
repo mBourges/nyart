@@ -4,7 +4,7 @@
       <v-flex xs12 md6>
         <v-text-field
           autofocus
-          prepend-icon="mdi-domain"
+          prepend-icon="business_center"
           label="Job Title"
           :value="record.JobTitle"
           @input="handleChange('JobTitle', $event)"

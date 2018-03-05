@@ -8,6 +8,27 @@
           :rules="candidateRules"
         />
       </v-flex>
+      <v-flex xs12>
+        <job-lookup
+          :value="record.Job"
+          @change="handleChange('Job', $event)"
+          :rules="jobRules"
+        />
+      </v-flex>
+      <v-flex xs12 md6>
+        <recruiter-lookup
+          :value="record.Recruiter"
+          @change="handleChange('Recruiter', $event)"
+        />
+      </v-flex>
+      <v-flex xs12 md6>
+        <v-text-field
+          label="Registration Date"
+          type="date"
+          :value="record.RegistrationDate"
+          @input="handleChange('RegistrationDate', $event)"
+        ></v-text-field>
+      </v-flex>
     </v-layout>
   </v-container>
   <!--<form @submit.prevent="handleSave">-->
@@ -83,18 +104,15 @@
 </template>
 
 <script>
-  import { CandidateLookup } from '../lookup';
+  import { CandidateLookup, JobLookup, RecruiterLookup } from '../lookup';
 
   export default {
     name: 'process-form',
-    components: { CandidateLookup },
+    components: { CandidateLookup, JobLookup, RecruiterLookup },
     data() {
       return {
         candidateRules: [
-          v => {
-            debugger;
-            return !!v || 'Candidate is required';
-          }
+          v => !!v || 'Candidate is required'
         ],
         jobRules: [
           v => !!v || 'Job is required'

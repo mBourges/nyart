@@ -8,6 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
+    "dev-build": "vue-cli-service build --mode development",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
@@ -24,6 +25,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@vue/cli-service": "^3.0.0-beta.3",
     "autoprefixer": "^7.1.5",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",

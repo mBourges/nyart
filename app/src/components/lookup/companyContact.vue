@@ -45,15 +45,24 @@
     },
     methods: {
       handleCompanyChange(value) {
-        this.$emit('company-change', value);
+        if (!value) {
+          this.$emit('company-change', null);
+          this.$emit('contact-change', null);
+        } else {
+          this.$emit('company-change', value);
+        }
       },
       handleClientChange(value) {
-        const contact = {
-          ...value,
-          ref: firebullet.generateRef('ClientContact', value.id)
-        };
+        if (!value) {
+          this.$emit('contact-change', null);
+        } else {
+          const contact = {
+            ...value,
+            ref: firebullet.generateRef('ClientContact', value.id)
+          };
 
-        this.$emit('contact-change', contact);
+          this.$emit('contact-change', contact);
+        }
       }
     },
     watch: {

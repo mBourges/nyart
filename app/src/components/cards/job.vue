@@ -26,10 +26,11 @@
       const salary = (<span>
         <v-icon class="mx-2" small>mdi-currency-cny</v-icon>
         <CurrencyDisplay value={ record.SalaryMinimum } />
+        <span class="px-2">to</span>
         <CurrencyDisplay value={ record.SalaryMaximum } />
       </span>);
 
-      return (<v-card height="100%">
+      return (<v-card height="100%" class="card-fill">
         <v-card-title primary-title>
           <div>
             <div class="headline">
@@ -38,7 +39,7 @@
             <span class="grey--text">{ record.Status }</span>
           </div>
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="card-text-fill">
           <div class="pb-2">
             { company } { clientContact }
           </div>
@@ -46,6 +47,7 @@
           <div>{`Registered by ${recruiterName} ${registrationDate}`}</div>
         </v-card-text>
         <v-card-actions>
+          <v-spacer></v-spacer>
           <v-btn flat to={links.job}>View</v-btn>
         </v-card-actions>
       </v-card>);
@@ -77,3 +79,14 @@
   // </div>);
 // }
 </script>
+
+<style scoped>
+  .card-fill {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-text-fill {
+    flex: 1 1 auto;
+  }
+</style>

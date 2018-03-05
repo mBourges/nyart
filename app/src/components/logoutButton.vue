@@ -1,6 +1,6 @@
 <template>
   <v-tooltip bottom>
-    <v-btn icon @click="logout">
+    <v-btn icon @click="logout" slot="activator">
       <v-icon>exit_to_app</v-icon>
     </v-btn>
     <span>logout</span>

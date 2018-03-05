@@ -1,7 +1,6 @@
 <template>
   <v-select
-    label="Candidate"
-    extra-query="AND Type:candidate"
+    label="Job"
     autocomplete
     :loading="loading"
     required
@@ -11,7 +10,7 @@
     @input="handleChange"
     clearable
     return-object
-    prepend-icon="person"
+    prepend-icon="business_center"
     item-text="Name"
     item-value="id"
     :rules="rules"
@@ -19,7 +18,7 @@
     <template slot="item" slot-scope="data">
       <v-list-tile-content>
         <v-list-tile-title>{{ data.item.Name }}</v-list-tile-title>
-        <v-list-tile-sub-title>{{ data.item.Company }}</v-list-tile-sub-title>
+        <v-list-tile-sub-title>{{ data.item.Company }} - {{ data.item.ClientContact }}</v-list-tile-sub-title>
       </v-list-tile-content>
     </template>
   </v-select>
@@ -31,7 +30,7 @@
   import firebullet from '@/lib/firebullet';
 
   export default {
-    name: 'candidate-lookup',
+    name: 'job-lookup',
     props: ['value', 'rules'],
     data() {
       return {
@@ -43,7 +42,7 @@
     beforeMount() {
       this.elastic = new Elastic();
       this.elastic
-        .setIndex('contacts')
+        .setIndex('jobs')
         .setType('doc')
         .size(15);
 
@@ -58,24 +57,25 @@
     },
     methods: {
       formatItem(item) {
-        const { Firstname, Lastname, Company } = item._source;
+        const { JobTitle, Company, ClientContact } = item._source;
 
         return {
           id: item._id,
-          Name: `${Firstname || ''} ${Lastname || ''}`,
-          Company: Company.Name
+          Name: JobTitle,
+          Company: Company.Name,
+          ClientContact: ClientContact.Name
         };
       },
       handleChange(value) {
         if (!value) {
           this.$emit('change', null);
         } else {
-          const candidate = {
+          const job = {
             ...value,
-            ref: firebullet.generateRef('Candidate', value.id)
+            ref: firebullet.generateRef('Job', value.id)
           };
 
-          this.$emit('change', candidate);
+          this.$emit('change', job);
         }
       },
       querySelections: debounce(function (v) {

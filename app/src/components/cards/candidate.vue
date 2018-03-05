@@ -30,7 +30,7 @@
         <CurrencyDisplay value={ record.Salary } />
       </span>);
 
-      return (<v-card height="100%">
+      return (<v-card height="100%" class="card-fill">
         <v-card-title primary-title>
           <div>
             <div class="headline">
@@ -41,7 +41,7 @@
             { record.Birthdate && <span class="ml-3"><small class="caption">{ age }</small></span> }
           </div>
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="card-text-fill">
           <div class="pb-2">
             { company } { job }
           </div>
@@ -49,9 +49,21 @@
           <div>{`Registered by ${record.Recruiter.Name} @${record.RegistrationDate}`}</div>
         </v-card-text>
         <v-card-actions>
+          <v-spacer></v-spacer>
           <v-btn flat to={links.candidate}>View</v-btn>
         </v-card-actions>
       </v-card>);
     }
   };
 </script>
+
+<style scoped>
+  .card-fill {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-text-fill {
+    flex: 1 1 auto;
+  }
+</style>
