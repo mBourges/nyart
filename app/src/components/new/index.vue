@@ -52,7 +52,8 @@
           { text: 'Candidate', value: 'candidate' },
           { text: 'Client Contact', value: 'clientContact' },
           { text: 'Company', value: 'company' },
-          { text: 'Job', value: 'job' }
+          { text: 'Job', value: 'job' },
+          { text: 'Application', value: 'process' }
         ]
       };
     },
@@ -70,7 +71,6 @@
           return this.$store.state.newRecord.type;
         },
         set(value) {
-          this.$store.commit('newRecord/updateType', value);
           this.$store.commit('newRecord/updateType', value);
           this.$store.commit('newRecord/updateRecord', { name: 'RegistrationDate', value: formatdateForInput(new Date()) });
           this.$store.commit('newRecord/updateRecord', { name: 'Recruiter', value: this.$store.getters['user/recruiter'] });

@@ -57,6 +57,12 @@ function insertJob(record) {
     .then(doc => doc.id);
 }
 
+function insertProcess(record) {
+  return firestore.collection('Process')
+    .add(record)
+    .then(doc => doc.id);
+}
+
 function insert(type, record) {
   switch (type) {
     case 'candidate':
@@ -67,6 +73,8 @@ function insert(type, record) {
       return insertCompany(record);
     case 'job':
       return insertJob(record);
+    case 'process':
+      return insertProcess(record);
     default:
   }
 }

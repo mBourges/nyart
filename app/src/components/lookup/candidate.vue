@@ -1,29 +1,38 @@
 <template>
   <v-select
-    :label="label"
+    label="Candidate"
+    extra-query="AND Type:candidate"
     autocomplete
     :loading="loading"
     required
     :items="items"
     :search-input.sync="search"
     :value="value"
-    @input="handleValueChanged"
-    :clearable="clearable"
+    @input="handleChange"
+    clearable
     return-object
-    :item-text="itemText"
-    :item-value="itemValue"
-    :prepend-icon="prependIcon"
+    prepend-icon="person"
+    item-text="Name"
+    item-value="id"
     :rules="rules"
-  />
+  >
+    <template slot="item" slot-scope="data">
+      <v-list-tile-content>
+        <v-list-tile-title>{{ data.item.Name }}</v-list-tile-title>
+        <v-list-tile-sub-title>{{ data.item.Company }}</v-list-tile-sub-title>
+      </v-list-tile-content>
+    </template>
+  </v-select>
 </template>
 
 <script>
   import debounce from 'debounce';
   import Elastic from '@/lib/elastic';
+  import firebullet from '@/lib/firebullet';
 
   export default {
-    name: 'lookup',
-    props: ['label', 'value', 'index', 'type', 'extraQuery', 'formatItem', 'clearable', 'itemText', 'itemValue', 'prependIcon', 'rules'],
+    name: 'candidate-lookup',
+    props: ['value', 'rules'],
     data() {
       return {
         loading: false,
@@ -48,8 +57,22 @@
       }
     },
     methods: {
-      handleValueChanged(value) {
-        this.$emit('change', value || {});
+      formatItem(item) {
+        const { Firstname, Lastname, Company } = item._source;
+
+        return {
+          id: item._id,
+          Name: `${Firstname || ''} ${Lastname || ''}`,
+          Company: Company.Name
+        };
+      },
+      handleChange(value) {
+        const candidate = {
+          ...value,
+          ref: firebullet.generateRef('Candidate', value.id)
+        };
+
+        this.$emit('value', candidate);
       },
       querySelections: debounce(function (v) {
         this.loading = true;

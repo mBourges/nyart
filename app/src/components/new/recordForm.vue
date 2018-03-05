@@ -3,6 +3,7 @@
   import ClientContactForm from './clientContact';
   import CompanyForm from './company';
   import JobForm from './job';
+  import processForm from './process';
 
   export default {
     functional: true,
@@ -22,6 +23,9 @@
           break;
         case 'job':
           component = JobForm;
+          break;
+        case 'process':
+          component = processForm;
           break;
         default:
       }
