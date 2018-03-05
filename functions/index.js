@@ -11,17 +11,17 @@ const {
   onCandidateDeletedIndex
 } = require('./candidate');
 
-// const {
-//   onClientContactCreatedIndex,
-//   onClientContactUpdatedIndex,
-//   onClientContactDeletedIndex
-// } = require('./clientContact');
+const {
+  onClientContactCreatedIndex,
+  onClientContactUpdatedIndex,
+  onClientContactDeletedIndex
+} = require('./clientContact');
 
-// const {
-//   onJobCreatedIndex,
-//   onJobupdatedIndex,
-//   onJobDeletedIndex
-// } = require('./job');
+const {
+  onJobCreatedIndex,
+  onJobupdatedIndex,
+  onJobDeletedIndex
+} = require('./job');
 
 
 const functions = require('firebase-functions');
@@ -42,10 +42,10 @@ exports.onCandidateCreatedIndex = onCandidateCreatedIndex;
 exports.onCandidateUpdatedIndex = onCandidateUpdatedIndex;
 exports.onCandidateDeletedIndex = onCandidateDeletedIndex;
 
-// exports.onJobCreatedIndex = onJobCreatedIndex;
-// exports.onJobupdatedIndex = onJobupdatedIndex;
-// exports.onJobDeletedIndex = onJobDeletedIndex;
+exports.onJobCreatedIndex = onJobCreatedIndex;
+exports.onJobupdatedIndex = onJobupdatedIndex;
+exports.onJobDeletedIndex = onJobDeletedIndex;
 
-// exports.onClientContactCreatedIndex = onClientContactCreatedIndex;
-// exports.onClientContactUpdatedIndex = onClientContactUpdatedIndex;
-// exports.onClientContactDeletedIndex = onClientContactDeletedIndex;
+exports.onClientContactCreatedIndex = onClientContactCreatedIndex;
+exports.onClientContactUpdatedIndex = onClientContactUpdatedIndex;
+exports.onClientContactDeletedIndex = onClientContactDeletedIndex;
