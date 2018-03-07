@@ -1,25 +1,33 @@
 import { firestore } from '@/lib/firebase';
+import firebullet from '@/lib/firebullet';
 import { set } from '@/lib/immutable';
 
 const SET_RECORD = 'setRecord';
+const SET_RELATED = 'setRelated';
 const RESET_RECORD = 'reset';
 
 let subscriptions = [];
 
 const state = {
-  isLoading: true,
+  isFetching: true,
   isSaving: false,
   type: null,
+  id: null,
   record: {},
+  related: {},
   original: {}
 };
 
 const mutations = {
-  [SET_RECORD](state, { type, record }) {
+  [SET_RECORD](state, { id, type, record }) {
     state.type = type;
+    state.id = id;
     state.record = record;
     state.original = record;
-    state.isLoading = true;
+    state.isFetching = false;
+  },
+  [SET_RELATED](state, { key, relatedRecords }) {
+    state.related = set(state.related, key, relatedRecords);
   },
   [RESET_RECORD](state) {
     state.record = state.orginal;
@@ -28,17 +36,17 @@ const mutations = {
 
 const actions = {
   fetch({ commit, state }, { type, id }) {
-    state.isLoading = true;
+    state.isFetching = true;
 
-    const sub = firestore.collection('Candidate')
-      .doc(id)
-      .onSnapshot(doc => {
-        const record = doc.data();
+    // const sub = firestore.collection('Candidate')
+    //   .doc(id)
+    //   .onSnapshot(doc => {
+    //     const record = doc.data();
 
-        commit(SET_RECORD, { type, record });
-      });
+    //     commit(SET_RECORD, { type, record });
+    //   });
 
-    subscriptions = [...subscriptions, sub];
+    subscriptions = firebullet.fetch(commit, { type, id }); // [...subscriptions, sub];
   },
   update({ commit, state }, { fieldpath, value }) {
     state.isSaving = true;
@@ -47,20 +55,27 @@ const actions = {
 
     return firestore.collection(type)
       .doc(record.id)
-      .update(recordToUpdate)
-      .then(() => {
-        commit(SET_RECORD, { type, recordToUpdate });
-      });
+      .update(recordToUpdate);
+    // .then(() => {
+    //   commit(SET_RECORD, { type, recordToUpdate });
+    // });
   },
   clear() {
-    subscriptions
-      .forEach(unsubscribe => unsubscribe());
+    if (subscriptions) {
+      subscriptions.forEach(unsubscribe => unsubscribe());
+    }
 
-    subscriptions = [];
+    state.subscriptions = [];
     state.type = null;
-    state.isLoading = true;
+    state.isFetching = true;
     state.record = {};
     state.original = {};
+  }
+};
+
+const getters = {
+  getRelated: (state) => {
+    return type => state.related[type];
   }
 };
 
@@ -68,5 +83,6 @@ export default {
   namespaced: true,
   state,
   mutations,
-  actions
+  actions,
+  getters
 };

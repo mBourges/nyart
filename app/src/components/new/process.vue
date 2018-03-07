@@ -16,6 +16,17 @@
         />
       </v-flex>
       <v-flex xs12 md6>
+        <v-text-field
+          required
+          label="Application Date"
+          type="date"
+          :value="record.Application && record.Application.StageDate"
+          @input="handleChange('RegistrationDate', $event)"
+          :rules="stageDateRules"
+          prepend-icon="mdi-calendar"
+        ></v-text-field>
+      </v-flex>
+      <v-flex xs12 md6>
         <recruiter-lookup
           :value="record.Recruiter"
           @change="handleChange('Recruiter', $event)"
@@ -116,6 +127,9 @@
         ],
         jobRules: [
           v => !!v || 'Job is required'
+        ],
+        stageDateRules: [
+          v => !!v || 'Application Date is required'
         ]
       };
     },

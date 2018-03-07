@@ -1,15 +1,12 @@
 <template>
   <div>
     <v-btn
-      fab
-      bottom
-      right
-      color="pink"
       dark
-      fixed
+      color="accent"
       @click.stop="dialog = !dialog"
     >
-      <v-icon>add</v-icon>
+      <v-icon left>add</v-icon>
+      New
     </v-btn>
     <v-dialog v-model="dialog" full-width>
       <v-card>

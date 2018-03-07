@@ -83,7 +83,42 @@ function generateRef(type, id) {
   return firestore.collection(type).doc(id);
 }
 
+function fetch(commit, { type, id }) {
+  switch (type) {
+    case 'candidate':
+      return fetchCandidate(commit, { type, id });
+    default:
+      return null;
+  }
+}
+
+function fetchCandidate(commit, { type, id }) {
+  const sub = firestore.collection('Candidate')
+    .doc(id)
+    .onSnapshot(doc => {
+      const record = doc.data();
+
+      commit('setRecord', { id, type, record });
+    });
+
+  const subResume = firestore.collection('Candidate')
+    .doc(id)
+    .collection('Resumes')
+    .onSnapshot(docs => {
+      let records = [];
+
+      docs.forEach(querySnapshot => {
+        records = [ ...records, querySnapshot.data() ];
+      });
+
+      commit('setRelated', { key: 'Resumes', relatedRecords: records });
+    });
+
+  return [ sub, subResume ];
+}
+
 export default {
   insert,
-  generateRef
+  generateRef,
+  fetch
 };

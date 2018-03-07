@@ -1,6 +1,6 @@
 <template>
   <v-toolbar
-    color="blue darken-3"
+    color="primary"
     dark
     app
     :clipped-left="$vuetify.breakpoint.mdAndUp"
@@ -13,6 +13,7 @@
     <search-input
       class="hidden-sm-and-down"
     />
+    <new />
     <v-spacer></v-spacer>
     <logout-button />
   </v-toolbar>
@@ -21,10 +22,11 @@
 <script>
   import LogoutButton from './logoutButton';
   import { SearchInput } from './search';
+  import New from './new';
 
   export default {
     name: 'app-header',
-    components: { LogoutButton, SearchInput },
+    components: { LogoutButton, SearchInput, New },
     methods: {
       toggleNavDrawer() {
         this.$emit('toggle-nav-drawer');

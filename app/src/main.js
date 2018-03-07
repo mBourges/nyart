@@ -12,9 +12,9 @@ import 'mdi/css/materialdesignicons.min.css';
 Vue.config.productionTip = process.env.NODE_ENV === 'production';
 Vue.use(Vuetify, {
   theme: {
-    primary: '#3f51b5',
-    secondary: '#b0bec5',
-    accent: '#8c9eff',
+    primary: '#00BCD4',
+    secondary: '#00ACC1',
+    accent: '#FFA726',
     error: '#b71c1c'
   }
 });

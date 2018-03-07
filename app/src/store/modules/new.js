@@ -1,4 +1,5 @@
 import firebullet from '@/lib/firebullet';
+import { set } from '@/lib/immutable';
 
 const TOGGLE_DIALOG = 'toggleDialog';
 const UPDATE_TYPE = 'updateType';
@@ -25,7 +26,7 @@ const mutations = {
     state.record = {};
   },
   [UPDATE_RECORD](state, { name, value }) {
-    state.record = Object.assign({}, state.record, { [name]: value });
+    state.record = set(state.record, name, value);
     console.log(state);
   }
 };

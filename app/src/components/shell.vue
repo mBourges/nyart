@@ -11,24 +11,23 @@
       <v-container fluid>
         <search-input class="hidden-md-and-up" />
       </v-container>
-      <!--<nav-menu />-->
+      <nav-menu />
     </v-navigation-drawer>
     <v-content class="content-full">
       <v-container fluid fill-height class="px-0 py-0">
         <router-view></router-view>
       </v-container>
     </v-content>
-    <new />
   </v-app>
 </template>
 
 <script>
   import AppHeader from './appHeader';
+  import NavMenu from './navMenu';
   import { SearchInput } from './search';
-  import New from './new';
 
   export default {
-    components: { AppHeader, SearchInput, New },
+    components: { AppHeader, NavMenu, SearchInput },
     data() {
       return { drawer: null };
     },
