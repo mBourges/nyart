@@ -103,7 +103,7 @@ function fetchCandidate(commit, { type, id }) {
 
   const subResume = firestore.collection('Candidate')
     .doc(id)
-    .collection('Resumes')
+    .collection('resumes')
     .onSnapshot(docs => {
       let records = [];
 

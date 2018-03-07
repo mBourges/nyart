@@ -42,9 +42,9 @@
 
     <v-tabs-items v-model="tab" class="scrollable">
       <v-tab-item id="tab-information">
-        <v-container class="scrollable fluid profile">
-          <v-layout row>
-            <v-flex xs12 sm4 md3>
+        <v-container :grid-list-md="$vuetify.breakpoint.smAndUp" class="scrollable fluid profile">
+          <v-layout row wrap>
+            <v-flex xs12 sm4>
               <v-list :dense="$vuetify.breakpoint.smAndDown">
                 <v-layout row align-center>
                   <v-flex xs6>
@@ -122,6 +122,22 @@
                     </v-list-tile-sub-title>
                   </v-list-tile-content>
                 </v-list-tile>
+              </v-list>
+            </v-flex>
+            <v-flex xs12 sm4>
+              <v-list :dense="$vuetify.breakpoint.smAndDown">
+                <v-layout row align-center>
+                  <v-flex xs6>
+                    <v-subheader>Contact Details</v-subheader>
+                  </v-flex>
+                  <v-flex xs6 class="text-xs-center">
+                    <v-btn flat icon color="accent">
+                      <v-icon :small="$vuetify.breakpoint.smAndDown">edit</v-icon>
+                    </v-btn>
+                  </v-flex>
+                </v-layout>
+                <email-list-item v-for="email in record.Emails" :key="email.Address" :email="email"/>
+                <phone-list-item v-for="phone in record.Phones" :key="phone.Number" :phone="phone"/>
               </v-list>
             </v-flex>
           </v-layout>
@@ -459,10 +475,11 @@
 
 <script>
   import { CurrencyDisplay } from '../currency';
+  import { EmailListItem, PhoneListItem } from '../contactDetails';
 
   export default {
     name: 'candidate-details',
-    components: { CurrencyDisplay },
+    components: { CurrencyDisplay, EmailListItem, PhoneListItem },
     data() {
       return {
         tab: 'tab-information'

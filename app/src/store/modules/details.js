@@ -28,6 +28,7 @@ const mutations = {
   },
   [SET_RELATED](state, { key, relatedRecords }) {
     state.related = set(state.related, key, relatedRecords);
+    console.log(state);
   },
   [RESET_RECORD](state) {
     state.record = state.orginal;
