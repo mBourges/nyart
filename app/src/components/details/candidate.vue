@@ -140,6 +140,9 @@
                 <phone-list-item v-for="phone in record.Phones" :key="phone.Number" :phone="phone"/>
               </v-list>
             </v-flex>
+            <v-flex xs12 sm4>
+              <codes-display label="industry" :codes="record.Industries" />
+            </v-flex>
           </v-layout>
         </v-container>
       </v-tab-item>
@@ -476,10 +479,11 @@
 <script>
   import { CurrencyDisplay } from '../currency';
   import { EmailListItem, PhoneListItem } from '../contactDetails';
+  import { CodesDisplay } from '../codes';
 
   export default {
     name: 'candidate-details',
-    components: { CurrencyDisplay, EmailListItem, PhoneListItem },
+    components: { CurrencyDisplay, EmailListItem, PhoneListItem, CodesDisplay },
     data() {
       return {
         tab: 'tab-information'
